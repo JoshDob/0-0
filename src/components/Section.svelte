@@ -1,8 +1,21 @@
 <script>
-  import { selectedSection } from '../store.js';
-  export let section;
+  import { createEventDispatcher } from 'svelte';
+  export let rune;
+
+  const dispatch = createEventDispatcher();
+
+  function selectRune() {
+    dispatch('select', rune);
+  }
 </script>
 
-<div class="section" on:click={() => $selectedSection = section}>
-  <img src={section.icon} alt={section.title} />
-</div>
+<style>
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+</style>
+
+<img src={rune} on:click={selectRune} />

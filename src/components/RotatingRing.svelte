@@ -1,10 +1,22 @@
 <script>
-  import { sections } from '../store.js';
   import Section from './Section.svelte';
+  export let runes;
 </script>
 
-<div class="rotating-ring">
-  {#each $sections as section (section.id)}
-    <Section {section} />
+<style>
+  .ring {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 50px;
+  }
+</style>
+
+<div class="ring">
+  {#each runes as rune}
+    <Section {rune} />
   {/each}
 </div>
