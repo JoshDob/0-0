@@ -1,21 +1,31 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  export let rune;
+  import { selectedSection } from '../store.js';
 
-  const dispatch = createEventDispatcher();
+  export let section = {};
 
-  function selectRune() {
-    dispatch('select', rune);
-  }
+  const selectSection = () => {
+    selectedSection.set(section);
+  };
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="section" on:click={selectSection}>
+  <img src={section.icon} alt={section.title} />
+</div>
+
 <style>
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  .section {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
   }
-</style>
 
-<img src={rune} on:click={selectRune} />
+  .section img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>

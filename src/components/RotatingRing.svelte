@@ -1,22 +1,15 @@
 <script>
+  import { onMount } from 'svelte';
   import Section from './Section.svelte';
-  export let runes;
+  import { sections, selectedSection } from '../store.js';
+
+  let selected = null;
+
+  $: selectedSection.set(selected);
 </script>
 
-<style>
-  .ring {
-    display: flex;
-    justify-content: space-around;
-    width: 300px;
-    height: 300px;
-    border: 1px solid black;
-    border-radius: 50%;
-    padding: 50px;
-  }
-</style>
-
 <div class="ring">
-  {#each runes as rune}
-    <Section {rune} />
+  {#each $sections as section (section.id)}
+    <Section {section} on:click={() => (selected = section)} />
   {/each}
 </div>
